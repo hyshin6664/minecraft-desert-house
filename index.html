@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>윤오의 사막 집 짓기 도감</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Malgun Gothic","맑은 고딕",system-ui,sans-serif;background:linear-gradient(180deg,#ffd98a 0%,#ffc45c 18%,#f7b267 40%,#e8d6a8 100%);color:#2b2016;min-height:100vh}
+.wrap{max-width:1240px;margin:0 auto;padding:18px 16px 60px}
+
+h1{font-size:clamp(26px,4.4vw,46px);font-weight:900;color:#7a3d0b;text-shadow:2px 2px 0 #fff3d6,4px 4px 0 rgba(122,61,11,.15);letter-spacing:-1px;line-height:1.2}
+.sub{font-size:clamp(14px,1.8vw,19px);color:#8a5a22;font-weight:700;margin-top:6px}
+.top{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+.sun{width:74px;height:74px;flex:0 0 auto}
+
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 18px}
+.tab{font-family:inherit;font-size:clamp(13px,1.5vw,17px);font-weight:900;padding:10px 18px;border:3px solid #b5832f;border-radius:12px;cursor:pointer;background:#fff6e0;color:#7a3d0b;box-shadow:0 4px 0 #b5832f;transition:transform .1s,background .2s}
+.tab:active{transform:translateY(3px);box-shadow:0 1px 0 #b5832f}
+.tab.on{background:linear-gradient(180deg,#f59e0b,#d97706);color:#fff;border-color:#8a5a22;box-shadow:0 4px 0 #8a5a22}
+
+.card{background:#fffaf0;border:4px solid #c89b50;border-radius:18px;padding:18px;margin-bottom:20px;box-shadow:0 8px 0 rgba(176,130,47,.35),0 14px 30px rgba(120,80,20,.18)}
+.card h2{font-size:clamp(20px,2.8vw,30px);color:#7a3d0b;font-weight:900;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.card h2 .n{background:#d97706;color:#fff;border-radius:10px;padding:2px 12px;font-size:.78em}
+.card h3{font-size:clamp(16px,2vw,22px);color:#8a5a22;font-weight:900;margin:16px 0 8px;display:flex;align-items:center;gap:8px}
+.lead{font-size:clamp(14px,1.7vw,18px);color:#5b4228;font-weight:600;line-height:1.6;margin-top:8px}
+
+.mats{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:12px;margin-top:14px}
+.mat{background:#fff;border:3px solid #e2c48a;border-radius:14px;padding:10px;text-align:center}
+.mat .nm{font-size:14px;font-weight:900;color:#5b4228;margin-top:6px}
+.mat .how{font-size:12px;color:#8a7a62;margin-top:3px;line-height:1.35}
+
+.row{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}
+.col{flex:1 1 300px;min-width:280px}
+.plan{background:#fff;border:3px solid #e2c48a;border-radius:14px;padding:12px}
+.plan svg{max-height:620px}
+.plan .ttl{font-size:15px;font-weight:900;color:#7a3d0b;margin-bottom:8px;text-align:center}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;justify-content:center}
+.lg{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:#5b4228}
+.lg i{width:15px;height:15px;border-radius:3px;border:1.5px solid rgba(0,0,0,.25);display:inline-block}
+
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:12px}
+.step{background:#fff;border:3px solid #e2c48a;border-radius:14px;padding:10px;text-align:center}
+.step .no{display:inline-block;background:#f59e0b;color:#fff;font-weight:900;border-radius:999px;padding:2px 12px;font-size:13px}
+.step .tx{font-size:13.5px;font-weight:700;color:#5b4228;margin-top:8px;line-height:1.45}
+
+.tips{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:12px}
+.tip{background:#fff;border:3px solid #e2c48a;border-radius:14px;padding:14px;display:flex;gap:12px;align-items:flex-start}
+.tip .ic{flex:0 0 auto}
+.tip b{color:#b45309;font-size:16px;display:block;margin-bottom:4px}
+.tip span b{display:inline;font-size:inherit;margin:0;color:#b45309}
+.tip span{font-size:13.5px;color:#5b4228;font-weight:600;line-height:1.5}
+.danger{border-color:#e07a5f;background:#fff4f0}
+.danger b{color:#c0392b}
+
+.big{display:block;margin:0 auto}
+.page{display:none}
+.page.on{display:block}
+footer{text-align:center;color:#8a5a22;font-weight:800;font-size:14px;padding:10px 0 0}
+
+@media (max-width:640px){
+  .wrap{padding:12px 10px 40px}
+  .card{padding:13px;border-width:3px}
+  .col{min-width:100%}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <svg class="sun" viewBox="0 0 100 100"><circle cx="50" cy="50" r="26" fill="#ffd54a" stroke="#e8a000" stroke-width="4"/><g stroke="#ffb703" stroke-width="7" stroke-linecap="round"><line x1="50" y1="6" x2="50" y2="18"/><line x1="50" y1="82" x2="50" y2="94"/><line x1="6" y1="50" x2="18" y2="50"/><line x1="82" y1="50" x2="94" y2="50"/><line x1="18" y1="18" x2="27" y2="27"/><line x1="73" y1="73" x2="82" y2="82"/><line x1="82" y1="18" x2="73" y2="27"/><line x1="27" y1="73" x2="18" y2="82"/></g></svg>
+    <div>
+      <h1>윤오의 사막 집 짓기 도감</h1>
+      <div class="sub">모래밖에 없는 사막에서 멋진 집 짓는 법 · 도면 그대로 따라 쌓기</div>
+    </div>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+
+  <!-- 1. 재료 -->
+  <div class="page" id="p0">
+    <div class="card">
+      <h2><span class="n">1</span>사막에서 먼저 모을 것</h2>
+      <div class="lead">사막엔 나무가 거의 없어요. 대신 <b>모래가 무한</b>이에요. 모래로 거의 다 만들 수 있습니다.</div>
+      <div class="mats" id="mats"></div>
+    </div>
+    <div class="card">
+      <h3>🔥 모래 → 사암 만드는 법</h3>
+      <div class="row">
+        <div class="col plan"><div class="ttl">작업대에서 2×2</div><div id="craft1"></div></div>
+        <div class="col plan"><div class="ttl">화로에 구우면</div><div id="craft2"></div></div>
+        <div class="col plan"><div class="ttl">계단 · 반블록</div><div id="craft3"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. 작은 집 -->
+  <div class="page" id="p1">
+    <div class="card">
+      <h2><span class="n">2</span>첫 집 — 사암 오두막 <span style="font-size:.6em;color:#8a5a22">7 × 7</span></h2>
+      <div class="lead">첫날 밤 전에 <b>30분이면 완성</b>. 모래만 60개쯤 있으면 됩니다.</div>
+      <div class="row">
+        <div class="col plan"><div class="ttl">① 바닥 도면 (위에서 본 모습)</div><div id="plan1"></div><div class="legend" id="lg1"></div></div>
+        <div class="col plan"><div class="ttl">② 완성한 모습</div><div id="iso1"></div></div>
+      </div>
+      <h3>🧱 쌓는 순서</h3>
+      <div class="steps" id="steps1"></div>
+    </div>
+  </div>
+
+  <!-- 3. 저택 -->
+  <div class="page" id="p2">
+    <div class="card">
+      <h2><span class="n">3</span>2층 사막 저택 <span style="font-size:.6em;color:#8a5a22">11 × 9</span></h2>
+      <div class="lead">계단으로 올라가는 <b>옥상 테라스</b>가 있는 집이에요. 테라코타로 줄무늬를 넣으면 진짜 멋있어집니다.</div>
+      <div class="row">
+        <div class="col plan"><div class="ttl">1층 도면</div><div id="plan2"></div><div class="legend" id="lg2"></div></div>
+        <div class="col plan"><div class="ttl">2층 · 옥상 도면</div><div id="plan3"></div></div>
+      </div>
+      <h3>🏠 완성한 모습</h3>
+      <div class="plan"><div id="iso2"></div></div>
+      <h3>✨ 멋있게 만드는 세 가지</h3>
+      <div class="tips" id="tips2"></div>
+    </div>
+  </div>
+
+  <!-- 4. 망루 -->
+  <div class="page" id="p3">
+    <div class="card">
+      <h2><span class="n">4</span>사막 망루 <span style="font-size:.6em;color:#8a5a22">5 × 5 · 높이 12</span></h2>
+      <div class="lead">높이 올라가면 <b>멀리까지 다 보여요</b>. 밤에 몬스터가 어디 있는지 미리 알 수 있습니다.</div>
+      <div class="row">
+        <div class="col plan"><div class="ttl">옆에서 본 모습 (한 층씩)</div><div id="side1"></div></div>
+        <div class="col plan"><div class="ttl">완성한 모습</div><div id="iso3"></div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2><span class="n">5</span>오아시스 정원</h2>
+      <div class="lead">양동이로 물을 떠 와서 <b>물 웅덩이</b>를 만들면, 그 옆에 나무도 심고 밭도 만들 수 있어요.</div>
+      <div class="plan"><div id="iso4"></div></div>
+    </div>
+  </div>
+
+  <!-- 5. 꿀팁 -->
+  <div class="page" id="p4">
+    <div class="card">
+      <h2><span class="n">6</span>사막에서 꼭 알아야 할 것</h2>
+      <div class="tips" id="tips3"></div>
+    </div>
+  </div>
+
+  <footer>아빠가 윤오를 위해 만든 사막 건축 도감 🐪</footer>
+</div>
+
+<script>
+/* ========== 블록 색 ========== */
+var C = {
+  S:['#e3d3a2','사암'], M:['#efe3b4','매끄러운 사암'], K:['#d4c184','깎은 사암'],
+  R:['#efe0ae','모래'], G:['#bfe6f2','유리'], D:['#a9793c','문'],
+  W:['#8b5a2b','원목'], P:['#c89b50','나무 판자'],
+  T:['#b06a3b','테라코타'], O:['#9c4a2a','주황 테라코타'],
+  L:['#ffd24a','횃불'], B:['#d64545','침대'], X:['#c2793c','상자'],
+  F:['#9aa0a6','화로'], A:['#caa96a','작업대'],
+  C2:['#4f8f3a','선인장'], V:['#2f7fe0','물'], E:['#6b4f2a','흙'],
+  N:['#86a84f','잎'], Y:['#6f5a33','마른 덤불'], '.':['#f3e8c6','바닥']
+};
+
+function shade(hex, f) {
+  var n = parseInt(hex.slice(1), 16);
+  var r = Math.min(255, Math.round(((n >> 16) & 255) * f));
+  var g = Math.min(255, Math.round(((n >> 8) & 255) * f));
+  var b = Math.min(255, Math.round((n & 255) * f));
+  return 'rgb(' + r + ',' + g + ',' + b + ')';
+}
+
+/* ========== 평면 도면 (위에서 본 격자) ========== */
+function drawPlan(el, rows, cell) {
+  cell = cell || 30;
+  var w = rows[0].length * cell, h = rows.length * cell;
+  var s = ['<svg viewBox="0 0 ' + (w + 2) + ' ' + (h + 2) + '" style="width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg">'];
+  for (var y = 0; y < rows.length; y++) {
+    for (var x = 0; x < rows[y].length; x++) {
+      var ch = rows[y][x];
+      var col = (C[ch] || C['.'])[0];
+      var px = x * cell + 1, py = y * cell + 1;
+      s.push('<rect x="' + px + '" y="' + py + '" width="' + cell + '" height="' + cell + '" fill="' + col + '" stroke="rgba(90,65,25,.35)" stroke-width="1"/>');
+      // 블록 질감 점
+      if (ch === 'S' || ch === 'K') s.push('<rect x="' + (px + cell * .22) + '" y="' + (py + cell * .5) + '" width="' + cell * .56 + '" height="2" fill="rgba(120,90,40,.3)"/>');
+      if (ch === 'G') s.push('<path d="M' + px + ' ' + (py + cell) + 'L' + (px + cell) + ' ' + py + '" stroke="#fff" stroke-width="2" opacity=".8"/>');
+      if (ch === 'D') s.push('<rect x="' + (px + cell * .18) + '" y="' + (py + cell * .12) + '" width="' + cell * .64 + '" height="' + cell * .76 + '" fill="none" stroke="#6b4420" stroke-width="2"/><circle cx="' + (px + cell * .72) + '" cy="' + (py + cell * .5) + '" r="2" fill="#6b4420"/>');
+      if (ch === 'L') s.push('<circle cx="' + (px + cell / 2) + '" cy="' + (py + cell / 2) + '" r="' + cell * .22 + '" fill="#fff0a8"/><circle cx="' + (px + cell / 2) + '" cy="' + (py + cell / 2) + '" r="' + cell * .4 + '" fill="#ffd24a" opacity=".25"/>');
+      if (ch === 'B') s.push('<rect x="' + (px + 3) + '" y="' + (py + 3) + '" width="' + (cell - 6) + '" height="' + (cell - 6) + '" rx="3" fill="#e05c5c"/><rect x="' + (px + 3) + '" y="' + (py + 3) + '" width="' + (cell - 6) + '" height="' + (cell / 3) + '" rx="3" fill="#fff"/>');
+      if (ch === 'X') s.push('<rect x="' + (px + 3) + '" y="' + (py + 3) + '" width="' + (cell - 6) + '" height="' + (cell - 6) + '" rx="2" fill="#b07a3a" stroke="#7a4e1d" stroke-width="2"/><rect x="' + (px + cell * .42) + '" y="' + (py + cell * .4) + '" width="' + cell * .16 + '" height="' + cell * .2 + '" fill="#5a3a14"/>');
+      if (ch === 'C2') s.push('<rect x="' + (px + cell * .3) + '" y="' + (py + cell * .15) + '" width="' + cell * .4 + '" height="' + cell * .7 + '" rx="3" fill="#3f7a2e"/>');
+      if (ch === 'V') s.push('<path d="M' + px + ' ' + (py + cell * .6) + 'q' + cell * .25 + ' -6 ' + cell * .5 + ' 0q' + cell * .25 + ' 6 ' + cell * .5 + ' 0" stroke="#fff" stroke-width="2" fill="none" opacity=".6"/>');
+      if (ch === 'A') s.push('<path d="M' + px + ' ' + (py + cell * .35) + 'h' + cell + 'M' + (px + cell * .5) + ' ' + (py + cell * .35) + 'v' + cell * .65 + '" stroke="#7a4e1d" stroke-width="2"/>');
+      if (ch === 'F') s.push('<rect x="' + (px + cell * .25) + '" y="' + (py + cell * .45) + '" width="' + cell * .5 + '" height="' + cell * .3 + '" fill="#4a4a4a"/><circle cx="' + (px + cell * .5) + '" cy="' + (py + cell * .6) + '" r="3" fill="#ff8c2b"/>');
+    }
+  }
+  s.push('</svg>');
+  el.innerHTML = s.join('');
+}
+
+function legend(el, keys) {
+  el.innerHTML = keys.map(function (k) {
+    return '<span class="lg"><i style="background:' + C[k][0] + '"></i>' + C[k][1] + '</span>';
+  }).join('');
+}
+
+/* ========== 입체 그림 (아이소메트릭) ========== */
+function drawIso(el, blocks, opt) {
+  opt = opt || {};
+  var W = opt.w || 26, H = opt.h || 13, HH = opt.hh || 20;
+  var minx = 1e9, maxx = -1e9, miny = 1e9, maxy = -1e9;
+  var items = blocks.map(function (b) {
+    var x = b[0], y = b[1], z = b[2];
+    var sx = (x - z) * W / 2, sy = (x + z) * H / 2 - y * HH;
+    minx = Math.min(minx, sx - W / 2); maxx = Math.max(maxx, sx + W / 2);
+    miny = Math.min(miny, sy); maxy = Math.max(maxy, sy + H + HH);
+    return { sx: sx, sy: sy, o: x + z + y * .5, t: b[3] };
+  });
+  items.sort(function (a, b) { return a.o - b.o; });
+  var pad = 20, vw = (maxx - minx) + pad * 2, vh = (maxy - miny) + pad * 2;
+  var ox = -minx + pad, oy = -miny + pad;
+  var s = ['<svg viewBox="0 0 ' + vw + ' ' + vh + '" style="width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg">'];
+  items.forEach(function (it) {
+    var base = (C[it.t] || C['.'])[0];
+    var x = it.sx + ox, y = it.sy + oy;
+    var op = (it.t === 'G') ? ' opacity=".55"' : '';
+    // 윗면
+    s.push('<path d="M' + x + ' ' + y + 'l' + (W / 2) + ' ' + (H / 2) + 'l' + (-W / 2) + ' ' + (H / 2) + 'l' + (-W / 2) + ' ' + (-H / 2) + 'z" fill="' + shade(base, 1.12) + '" stroke="rgba(70,50,20,.35)" stroke-width=".7"' + op + '/>');
+    // 왼쪽면
+    s.push('<path d="M' + (x - W / 2) + ' ' + (y + H / 2) + 'l0 ' + HH + 'l' + (W / 2) + ' ' + (H / 2) + 'l0 ' + (-HH) + 'z" fill="' + shade(base, .78) + '" stroke="rgba(70,50,20,.35)" stroke-width=".7"' + op + '/>');
+    // 오른쪽면
+    s.push('<path d="M' + (x + W / 2) + ' ' + (y + H / 2) + 'l0 ' + HH + 'l' + (-W / 2) + ' ' + (H / 2) + 'l0 ' + (-HH) + 'z" fill="' + shade(base, .6) + '" stroke="rgba(70,50,20,.35)" stroke-width=".7"' + op + '/>');
+  });
+  s.push('</svg>');
+  el.innerHTML = s.join('');
+}
+
+/* ========== 집 모델 만들기 ========== */
+function hutBlocks(stage) {
+  var b = [], i, j, k;
+  // 바닥 7x7
+  for (i = 0; i < 7; i++) for (j = 0; j < 7; j++) b.push([i, 0, j, 'M']);
+  if (stage < 2) return b;
+  // 벽 (높이 1~3)
+  for (k = 1; k <= 3; k++) {
+    for (i = 0; i < 7; i++) {
+      for (j = 0; j < 7; j++) {
+        var edge = (i === 0 || i === 6 || j === 0 || j === 6);
+        if (!edge) continue;
+        var t = 'S';
+        if (k === 2 && ((i === 3 && j === 0) || (i === 0 && j === 3) || (i === 6 && j === 3))) t = 'G';
+        if (j === 6 && i === 3 && k <= 2) t = 'D';
+        b.push([i, k, j, t]);
+      }
+    }
+  }
+  if (stage < 3) return b;
+  // 지붕
+  for (i = -1; i < 8; i++) for (j = -1; j < 8; j++) b.push([i, 4, j, 'K']);
+  if (stage < 4) return b;
+  // 장식
+  b.push([1, 1, 1, 'B']); b.push([2, 1, 1, 'B']);
+  b.push([5, 1, 1, 'X']); b.push([5, 1, 2, 'A']); b.push([5, 1, 3, 'F']);
+  b.push([0, 3, 1, 'L']); b.push([6, 3, 5, 'L']);
+  b.push([-2, 1, 3, 'C2']); b.push([-2, 2, 3, 'C2']);
+  return b;
+}
+
+function villaBlocks() {
+  var b = [], i, j, k;
+  for (i = 0; i < 11; i++) for (j = 0; j < 9; j++) b.push([i, 0, j, 'M']);
+  for (k = 1; k <= 4; k++) {
+    for (i = 0; i < 11; i++) for (j = 0; j < 9; j++) {
+      if (!(i === 0 || i === 10 || j === 0 || j === 8)) continue;
+      var t = (k === 3) ? 'O' : 'S';           // 3층 높이에 주황 테라코타 줄무늬
+      if (k === 2 && (i % 3 === 1) && (j === 0 || j === 8)) t = 'G';
+      if (k === 2 && (j % 3 === 1) && (i === 0 || i === 10)) t = 'G';
+      if (j === 8 && i === 5 && k <= 2) t = 'D';
+      b.push([i, k, j, t]);
+    }
+  }
+  for (i = 0; i < 11; i++) for (j = 0; j < 9; j++) b.push([i, 5, j, 'M']);   // 2층 바닥
+  // 2층 벽(낮게) + 옥상 난간
+  for (k = 6; k <= 8; k++) {
+    for (i = 2; i < 9; i++) for (j = 1; j < 8; j++) {
+      if (!(i === 2 || i === 8 || j === 1 || j === 7)) continue;
+      var t2 = (k === 8) ? 'K' : 'S';
+      if (k === 7 && (i === 5 || j === 4)) t2 = 'G';
+      b.push([i, k, j, t2]);
+    }
+  }
+  for (i = 2; i <= 8; i++) for (j = 1; j <= 7; j++) b.push([i, 9, j, 'K']);  // 2층 지붕
+  // 옥상 난간(1층 지붕 가장자리)
+  for (i = 0; i < 11; i++) { b.push([i, 6, 0, 'K']); b.push([i, 6, 8, 'K']); }
+  for (j = 0; j < 9; j++) { b.push([0, 6, j, 'K']); b.push([10, 6, j, 'K']); }
+  // 장식
+  b.push([1, 6, 1, 'C2']); b.push([9, 6, 7, 'C2']);
+  b.push([0, 4, 4, 'L']); b.push([10, 4, 4, 'L']);
+  b.push([13, 1, 2, 'C2']); b.push([13, 2, 2, 'C2']); b.push([13, 3, 2, 'C2']);
+  return b;
+}
+
+function towerBlocks() {
+  var b = [], i, j, k;
+  for (k = 0; k <= 11; k++) {
+    for (i = 0; i < 5; i++) for (j = 0; j < 5; j++) {
+      var edge = (i === 0 || i === 4 || j === 0 || j === 4);
+      if (k === 0) { b.push([i, 0, j, 'M']); continue; }
+      if (!edge) continue;
+      var t = 'S';
+      if (k % 4 === 0) t = 'O';
+      if (k === 2 && ((i === 2 && j === 0) || (i === 0 && j === 2))) t = 'G';
+      if (k === 9 || k === 10) { if ((i + j) % 2 === 0) t = 'G'; }
+      b.push([i, k, j, t]);
+    }
+  }
+  for (i = -1; i < 6; i++) for (j = -1; j < 6; j++) b.push([i, 12, j, 'K']);
+  for (i = -1; i < 6; i += 2) { b.push([i, 13, -1, 'K']); b.push([i, 13, 5, 'K']); }
+  for (j = -1; j < 6; j += 2) { b.push([-1, 13, j, 'K']); b.push([5, 13, j, 'K']); }
+  b.push([2, 13, 2, 'L']);
+  return b;
+}
+
+function oasisBlocks() {
+  var b = [], i, j;
+  for (i = 0; i < 13; i++) for (j = 0; j < 11; j++) {
+    var dx = i - 6, dj = j - 5, d = dx * dx + dj * dj;
+    if (d <= 6) b.push([i, 0, j, 'V']);
+    else if (d <= 14) b.push([i, 0, j, 'E']);
+    else b.push([i, 0, j, 'R']);
+  }
+  // 나무 2그루
+  [[2, 2], [10, 8]].forEach(function (p) {
+    for (var k = 1; k <= 4; k++) b.push([p[0], k, p[1], 'W']);
+    for (var a = -2; a <= 2; a++) for (var c = -2; c <= 2; c++) {
+      if (Math.abs(a) + Math.abs(c) > 3) continue;
+      b.push([p[0] + a, 5, p[1] + c, 'N']);
+      if (Math.abs(a) + Math.abs(c) <= 1) b.push([p[0] + a, 6, p[1] + c, 'N']);
+    }
+  });
+  // 밭
+  for (i = 3; i <= 5; i++) for (j = 8; j <= 9; j++) b.push([i, 1, j, 'N']);
+  // 선인장
+  [[11, 1], [1, 9]].forEach(function (p) {
+    for (var k = 1; k <= 3; k++) b.push([p[0], k, p[1], 'C2']);
+  });
+  return b;
+}
+
+/* ========== 재료 아이콘 ========== */
+function matIcon(type, extra) {
+  var col = C[type][0];
+  var s = '<svg viewBox="0 0 80 64" style="width:84px;height:auto">';
+  var W = 40, H = 20, HH = 26, x = 40, y = 8;
+  s += '<path d="M' + x + ' ' + y + 'l' + W / 2 + ' ' + H / 2 + 'l' + (-W / 2) + ' ' + H / 2 + 'l' + (-W / 2) + ' ' + (-H / 2) + 'z" fill="' + shade(col, 1.12) + '" stroke="rgba(70,50,20,.4)"/>';
+  s += '<path d="M' + (x - W / 2) + ' ' + (y + H / 2) + 'l0 ' + HH + 'l' + W / 2 + ' ' + H / 2 + 'l0 ' + (-HH) + 'z" fill="' + shade(col, .78) + '" stroke="rgba(70,50,20,.4)"/>';
+  s += '<path d="M' + (x + W / 2) + ' ' + (y + H / 2) + 'l0 ' + HH + 'l' + (-W / 2) + ' ' + H / 2 + 'l0 ' + (-HH) + 'z" fill="' + shade(col, .6) + '" stroke="rgba(70,50,20,.4)"/>';
+  if (extra) s += extra;
+  return s + '</svg>';
+}
+
+var MATS = [
+  ['R', '모래', '삽으로 바로 파기'],
+  ['S', '사암', '모래 4개 → 작업대 2×2'],
+  ['M', '매끄러운 사암', '사암을 화로에 굽기'],
+  ['K', '깎은 사암', '사암 4개 → 2×2'],
+  ['G', '유리', '모래를 화로에 굽기'],
+  ['W', '원목', '사막 마을·오아시스 나무'],
+  ['C2', '선인장', '모래 위에만 심어져요'],
+  ['O', '주황 테라코타', '점토 구워서 염색'],
+  ['L', '횃불', '막대 + 석탄(또는 숯)'],
+  ['V', '물 양동이', '오아시스·사막 우물에서'],
+];
+
+/* ========== 팁 ========== */
+var TIPS2 = [
+  ['🎨', '줄무늬를 넣자', '벽 가운데 한 줄만 <b>주황 테라코타</b>로 바꾸면 밋밋한 사암 벽이 확 살아나요.'],
+  ['🪟', '창문은 크게', '유리를 한 칸씩 띄엄띄엄 말고 <b>가로로 길게</b> 넣으면 진짜 집 같아요.'],
+  ['🪜', '계단 블록으로 지붕', '맨 윗줄을 <b>사암 계단</b>으로 두르면 지붕 끝이 뾰족해져서 멋있어집니다.'],
+];
+
+var TIPS3 = [
+  ['☀️', '사막엔 비가 안 와요', '그래서 불이 잘 번져요. 용암 근처에 나무 블록 두지 않기.', 0],
+  ['🧟', '허스크를 조심!', '사막 좀비인 <b>허스크</b>는 <b>낮에도 안 타고</b> 돌아다녀요. 맞으면 배고픔이 생깁니다. 집에 문 꼭 달기.', 1],
+  ['💣', '사막 신전 바닥의 파란 블록', '사막 신전 가운데 <b>파란 테라코타</b> 아래에는 <b>TNT 9개</b>가 있어요. 밟지 말고 옆에서 구멍을 파서 내려가세요.', 1],
+  ['🌵', '선인장은 옆에 붙이면 부서져요', '선인장은 <b>모래 위</b>에만 심기고, 옆 칸에 블록이 닿으면 툭 부서집니다. 한 칸씩 띄우기.', 0],
+  ['🐪', '낙타를 타면 빨라요', '사막 마을에 낙타가 있어요. 키가 커서 <b>좀비가 못 때리고</b>, 두 명이 같이 탈 수 있습니다.', 0],
+  ['💧', '물은 꼭 양동이로', '오아시스나 사막 우물에서 물을 떠 오세요. 물 한 칸만 있어도 <b>밭 9칸</b>을 적실 수 있어요.', 0],
+];
+
+/* ========== 그리기 ========== */
+var PAGES = ['① 재료 모으기', '② 첫 집', '③ 2층 저택', '④ 망루·정원', '⑤ 꿀팁'];
+var tabs = document.getElementById('tabs');
+PAGES.forEach(function (t, i) {
+  var b = document.createElement('button');
+  b.className = 'tab' + (i === 0 ? ' on' : '');
+  b.textContent = t;
+  b.onclick = function () {
+    document.querySelectorAll('.tab').forEach(function (x, j) { x.classList.toggle('on', j === i); });
+    document.querySelectorAll('.page').forEach(function (x, j) { x.classList.toggle('on', j === i); });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+  tabs.appendChild(b);
+});
+document.getElementById('p0').classList.add('on');
+
+// 재료
+document.getElementById('mats').innerHTML = MATS.map(function (m) {
+  return '<div class="mat">' + matIcon(m[0]) + '<div class="nm">' + m[1] + '</div><div class="how">' + m[2] + '</div></div>';
+}).join('');
+
+// 제작법
+drawPlan(document.getElementById('craft1'), ['RR', 'RR'], 40);
+document.getElementById('craft1').insertAdjacentHTML('beforeend',
+  '<div style="text-align:center;font-weight:800;color:#7a3d0b;margin-top:6px">모래 4개 → 사암 1개</div>');
+drawPlan(document.getElementById('craft2'), ['SG'], 40);
+document.getElementById('craft2').insertAdjacentHTML('beforeend',
+  '<div style="text-align:center;font-weight:800;color:#7a3d0b;margin-top:6px">사암→매끄러운 사암 · 모래→유리</div>');
+drawPlan(document.getElementById('craft3'), ['SSS', '...', 'SSS'], 34);
+document.getElementById('craft3').insertAdjacentHTML('beforeend',
+  '<div style="text-align:center;font-weight:800;color:#7a3d0b;margin-top:6px">사암 6개 → 계단 4개 / 3개 → 반블록 6개</div>');
+
+// 작은 집
+drawPlan(document.getElementById('plan1'), [
+  'SSSSSSS',
+  'SBB...S',
+  'S.....S',
+  'G.....G',
+  'S.....S',
+  'S...XAS',
+  'SSSDSSS'
+], 34);
+legend(document.getElementById('lg1'), ['S', 'G', 'D', 'B', 'X', 'A']);
+drawIso(document.getElementById('iso1'), hutBlocks(4));
+
+var STEPS = [
+  ['바닥 깔기', '7×7 네모로 <b>매끄러운 사암</b>을 깔아요.'],
+  ['벽 세우기', '가장자리만 <b>3칸 높이</b>로 둘러 쌓습니다.'],
+  ['문·창문 내기', '한쪽 가운데는 문, 양옆은 유리로 바꿔요.'],
+  ['지붕 덮기', '<b>깎은 사암</b>으로 덮고 한 칸씩 더 튀어나오게.'],
+  ['안 꾸미기', '침대·상자·작업대·화로를 넣고 횃불을 켜요.']
+];
+document.getElementById('steps1').innerHTML = STEPS.map(function (s, i) {
+  var el = document.createElement('div');
+  var tmp = document.createElement('div');
+  drawIso(tmp, hutBlocks(Math.min(i + 1, 4)), { w: 16, h: 8, hh: 12 });
+  return '<div class="step"><span class="no">' + (i + 1) + '</span>' + tmp.innerHTML +
+    '<div class="tx"><b>' + s[0] + '</b><br>' + s[1] + '</div></div>';
+}).join('');
+
+// 저택
+drawPlan(document.getElementById('plan2'), [
+  'SSSSSSSSSSS',
+  'SBB.....XXS',
+  'G.........G',
+  'S....A....S',
+  'G.........G',
+  'S....F....S',
+  'G.........G',
+  'S.........S',
+  'SSSSSDSSSSS'
+], 28);
+legend(document.getElementById('lg2'), ['S', 'G', 'D', 'O', 'K', 'B']);
+drawPlan(document.getElementById('plan3'), [
+  'KKKKKKKKKKK',
+  'K.........K',
+  'K.SSSSSSS.K',
+  'K.S.....S.K',
+  'K.S..L..S.K',
+  'K.S.....S.K',
+  'K.SSSGSSS.K',
+  'K.........K',
+  'KKKKKKKKKKK'
+], 28);
+drawIso(document.getElementById('iso2'), villaBlocks(), { w: 15, h: 7.5, hh: 11.5 });
+
+document.getElementById('tips2').innerHTML = TIPS2.map(function (t) {
+  return '<div class="tip"><div class="ic" style="font-size:30px">' + t[0] + '</div><div><b>' + t[1] + '</b><span>' + t[2] + '</span></div></div>';
+}).join('');
+
+// 망루 측면도
+drawPlan(document.getElementById('side1'), [
+  '..K..',
+  '.KKK.',
+  'KKKKK',
+  'SGSGS',
+  'SGSGS',
+  'OOOOO',
+  'S...S',
+  'S...S',
+  'S.G.S',
+  'OOOOO',
+  'S...S',
+  'S.D.S',
+  'MMMMM'
+], 20);
+drawIso(document.getElementById('iso3'), towerBlocks(), { w: 16, h: 8, hh: 12 });
+drawIso(document.getElementById('iso4'), oasisBlocks(), { w: 15, h: 7.5, hh: 11 });
+
+// 꿀팁
+document.getElementById('tips3').innerHTML = TIPS3.map(function (t) {
+  return '<div class="tip' + (t[3] ? ' danger' : '') + '"><div class="ic" style="font-size:30px">' + t[0] + '</div><div><b>' + t[1] + '</b><span>' + t[2] + '</span></div></div>';
+}).join('');
+</script>
+</body>
+</html>
